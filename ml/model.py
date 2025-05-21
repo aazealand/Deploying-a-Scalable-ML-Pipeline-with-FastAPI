@@ -23,7 +23,7 @@ def train_model(X_train, y_train):
     # TODO: implement the function
     
     # create the model
-    model = LogisticRegression()
+    model = LogisticRegression(random_state=42)
 
     # train the model
     model.fit(X_train, y_train)
@@ -98,7 +98,9 @@ def load_model(path):
     # TODO: implement the function
     # load model from path
     with open(path, 'rb') as file:
-        loaded_model = pickle.load(file)
+        return pickle.load(file)
+    
+    
 
 
 def performance_on_categorical_slice(
