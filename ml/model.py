@@ -23,7 +23,7 @@ def train_model(X_train, y_train):
     # TODO: implement the function
     
     # create the model
-    model = LogisticRegression(random_state=42)
+    model = LogisticRegression(random_state=42, solver='liblinear')
 
     # train the model
     model.fit(X_train, y_train)
