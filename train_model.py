@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -80,6 +79,10 @@ print(f"Precision: {p:.4f} | Recall: {r:.4f} | F1: {fb:.4f}")
 # TODO: compute the performance on model slices using the 
 # performance_on_categorical_slice function
 # iterate through the categorical features
+
+# place results in a list (will save to df & csv later)
+slice_results = []
+
 for col in cat_features:
     # iterate through the unique values in one categorical feature
     for slicevalue in sorted(test[col].unique()):
@@ -99,3 +102,17 @@ for col in cat_features:
         with open("slice_output.txt", "a") as f:
             print(f"{col}: {slicevalue}, Count: {count:,}", file=f)
             print(f"Precision: {p:.4f} | Recall: {r:.4f} | F1: {fb:.4f}", file=f)
+        
+        # append to slice_results
+        slice_results.append({
+            'feature': col,
+            'slice_value': slicevalue,
+            'count': count,
+            'precision': p,
+            'recall': r,
+            'f1': fb
+        })
+
+        # convert to df & save to csv in 'data' folder
+        df_results = pd.DataFrame(slice_results)
+        df_results.to_csv('data/slice_output.csv', index=False)
