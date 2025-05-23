@@ -1,28 +1,37 @@
 import pytest
-# TODO: add necessary import
+import os
+import pandas as pd
+from ml.data import apply_label
+
 
 # TODO: implement the first test. Change the function name and input as needed
-def test_one():
+def test_apply_label():
     """
-    # add description for the first test
+    tests the operation of apply_label() function in data.py
     """
-    # Your code here
-    pass
+    assert apply_label([1]) == ">50K"
+    assert apply_label([0]) == "<=50K"
 
-
+    
 # TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_slice_output_file_exists():
     """
-    # add description for the second test
+    test the existence of 'slice_output.txt' in the current directory
     """
-    # Your code here
-    pass
+    slice_output_path = os.path.join(os.getcwd(), 'slice_output.txt')
+    assert os.path.exists(slice_output_path)
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_three():
+def test_metrics_range():
     """
-    # add description for the third test
+    checks slice output
+    verifies value of each metric (precision, recall, f-score)
+    is between 0.0 & 1 (inclusive)
     """
-    # Your code here
-    pass
+    df = pd.read_csv('data/slice_output.csv')
+    assert df['precision'].between(0,1).all()
+    assert df['recall'].between(0,1).all()
+    assert df['f1'].between(0,1).all()
+    
+
