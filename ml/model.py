@@ -20,7 +20,6 @@ def train_model(X_train, y_train):
     model
         Trained machine learning model.
     """
-    # TODO: implement the function
     
     # create the model
     model = LogisticRegression(random_state=42, solver='liblinear')
@@ -68,7 +67,6 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    # TODO: implement the function
     
     # make predictions on the trained model
     preds = model.predict(X)
@@ -86,7 +84,6 @@ def save_model(model, path):
     path : str
         Path to save pickle file.
     """
-    # TODO: implement the function
     
     # save model to path
     with open(path, 'wb') as file:
@@ -95,7 +92,7 @@ def save_model(model, path):
 
 def load_model(path):
     """ Loads pickle file from `path` and returns it."""
-    # TODO: implement the function
+
     # load model from path
     with open(path, 'rb') as file:
         return pickle.load(file)
